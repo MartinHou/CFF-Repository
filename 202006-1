@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+typedef struct{
+    int x;
+    int y;
+    char numtype;
+}type_Point;
+
+typedef struct{
+    int th0;
+    int th1;
+    int th2;
+}type_Line;
+
+//计算ax+by+c值的函数
+int fun_calculation(type_Point point,type_Line line){
+    return line.th0+line.th1*point.x+line.th2*point.y;
+}
+
+int main()
+{
+    int m,n;
+    cin>>n>>m;//输入点的个数n和线的个数m
+    type_Point point[n];
+    type_Line line[m];
+    for(int i=0;i<n;++i){//输入n个点
+        cin>>point[i].x>>point[i].y>>point[i].numtype;
+    }
+    for(int i=0;i<m;++i){//输入m条线方程系数
+        cin>>line[i].th0>>line[i].th1>>line[i].th2;
+//        for(int j=0;j<n;++j){//如果点在直线上，则结束程序
+//            if(fun_calculation(point[j],line[i])==0)exit(0);
+//        }
+    }
+    for(int i=0;i<m;++i){
+        int k=0;
+        for(int j=0;j<n;++j){
+            if(point[j].numtype=='A'){
+                if(fun_calculation(point[j],line[i])<0)k++;
+            }else{
+                if(fun_calculation(point[j],line[i])>0)k++;
+            }
+        }
+        if(k==0||k==n){//如果发生不匹配，则输出NO
+            cout<<"Yes"<<endl;
+        }else{
+            cout<<"No"<<endl;
+        }
+    }
+    return 0;
+}
