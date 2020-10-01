@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+void maxnum(int deduction[],int i,int &maxx,int &maxy){
+    int Max=deduction[0],Maxq=0;
+    for(int j=1;j<i;j++){
+        if(deduction[j]>Max){
+            Max=deduction[j];
+            Maxq=j;
+        }
+    }
+    maxx=Max;
+    maxy=Maxq+1;
+}
+
+int main()
+{
+    int N,M,T=0,k,P;
+    cin>>N>>M;
+    int a[N][M+1];
+    int deduction[N];
+    for(int i=0;i<N;i++){
+        deduction[i]=0;
+        for(int j=0;j<M+1;j++){
+            cin>>a[i][j];//input is negative from 2nd on!!
+            T+=a[i][j];
+            if(j>=1){
+                deduction[i]-=a[i][j];//deduction is positive!!
+            }
+        }
+    }
+    maxnum(deduction,N,P,k);
+    cout<<T<<" "<<k<<" "<<P;
+    return 0;
+}
