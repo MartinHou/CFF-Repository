@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+
+void swap(int &a,int &b){
+    int temp=a;
+    a=b;
+    b=temp;
+}
+
+int main(){
+    int n,X,Y;
+    cin>>n>>X>>Y;
+    int pos[n][2],sqdis[n][2];//pos为各点坐标，sqdis第一位为到各点的距离的平方，第二位为站点序号
+    for(int i=0;i<n;++i){
+        cin>>pos[i][0]>>pos[i][1];
+        sqdis[i][0]=(pos[i][0]-X)*(pos[i][0]-X)+(pos[i][1]-Y)*(pos[i][1]-Y);//将各点到病人距离平方记录在第一位
+        sqdis[i][1]=i+1;//将站点序号记录在第二位
+    }
+//冒泡排序：每轮将最大的放到最后（由于等于情况不做任何交换，所以距离相等，优先输出序列较小的）
+    for(int i=0;i<n-1;++i){
+        for(int j=0;j<n-i-1;++j){
+            if(sqdis[j][0]>sqdis[j+1][0]){
+                swap(sqdis[j][0],sqdis[j+1][0]);//将距离交换
+                swap(sqdis[j][1],sqdis[j+1][1]);//同时将序号交换
+            }
+        }
+    }
+    cout<<sqdis[0][1]<<endl<<sqdis[1][1]<<endl<<sqdis[2][1];
+    return 0;
+}
