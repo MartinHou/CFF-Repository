@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+bool fun(int h){
+    do{
+        if(h%10==7)return 1;
+    }while(h/=10);
+    return 0;
+}
+
+int main()
+{
+    int num,h=1,k=0,a=0,b=0,c=0,d=0;
+    cin>>num;
+    while(k<num){
+        if(h%7==0||fun(h)){//7倍数，个十百位有7
+            switch(h%4)
+            {
+                case 0:d++;break;
+                case 1:a++;break;
+                case 2:b++;break;
+                case 3:c++;break;
+            }
+        }else{
+            k++;
+        }
+        h++;
+    }
+    cout<<a<<endl<<b<<endl<<c<<endl<<d<<endl;
+    return 0;
+}
