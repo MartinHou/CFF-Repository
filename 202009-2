@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int n,k,t,xl,yd,xr,yu,num1=0,num2=0,x,y;
+    cin>>n>>k>>t>>xl>>yd>>xr>>yu;
+    for(int i=0;i<n;++i){
+        int count=0,continuous=0,mark=0;//count记录是否有进入过危险区，continuous记录进入危险区最高连续次数，mark用于记录continuous>=k情况是否成立
+        for(int j=0;j<t;++j){
+            cin>>x>>y;
+            if(x>=xl && x<=xr && y>=yd && y<=yu){
+                count=1;
+                continuous++;
+                if(continuous>=k){
+                    mark=1;
+                }
+            }else continuous=0;
+        }
+        if(count){
+            num1++;
+            if(mark)num2++;
+        }
+    }
+    cout<<num1<<endl<<num2;
+    return 0;
+}
